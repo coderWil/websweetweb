@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>William — Freelance Web Developer</title>
+<style>
+  :root {
+    --white: #ffffff;
+    --dark-blue: #1e3a8a;
+    --dark-blue-hover: #1e40af;
+    --blue: #3B82F6;
+    --purple: #8B5CF6;
+    --green: #10B981;
+    --green-hover: #059669;
+    --heading: #0f172a;
+    --body-text: #6b7280;
+    --card-bg: #ffffff;
+    --border-light: #e5e7eb;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--white);
+    color: var(--body-text);
+    line-height: 1.6;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  ul {
+    list-style: none;
+  }
+
+  section {
+    padding: 100px 24px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  h1, h2, h3 {
+    color: var(--heading);
+    font-weight: 700;
+  }
+
+  /* ---------- Navigation ---------- */
+  .navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  .nav-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 18px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .nav-logo {
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: var(--heading);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+  }
+
+  .nav-links a {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--body-text);
+    transition: color 0.2s ease;
+    position: relative;
+  }
+
+  .nav-links a:hover {
+    color: var(--dark-blue);
+  }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 0%;
+    height: 2px;
+    background-color: var(--dark-blue);
+    transition: width 0.25s ease;
+  }
+
+  .nav-links a:hover::after {
+    width: 100%;
+  }
+
+  .nav-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    background: none;
+    border: none;
+  }
+
+  .nav-toggle span {
+    width: 24px;
+    height: 2px;
+    background-color: var(--heading);
+    transition: all 0.3s ease;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    min-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    line-height: 1.1;
+    margin-bottom: 20px;
+  }
+
+  .hero .subtitle {
+    font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+    color: var(--body-text);
+    margin-bottom: 40px;
+    max-width: 500px;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 14px 32px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    border: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+  }
+
+  .btn:hover {
+    transform: translateY(-3px);
+  }
+
+  .btn-cta {
+    background-color: var(--green);
+    color: var(--white);
+    box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
+  }
+
+  .btn-cta:hover {
+    background-color: var(--green-hover);
+    box-shadow: 0 8px 20px rgba(16, 185, 129, 0.45);
+  }
+
+  .btn-contact {
+    background-color: var(--dark-blue);
+    color: var(--white);
+    box-shadow: 0 4px 14px rgba(30, 58, 138, 0.3);
+  }
+
+  .btn-contact:hover {
+    background-color: var(--dark-blue-hover);
+    box-shadow: 0 8px 20px rgba(30, 58, 138, 0.4);
+  }
+
+  /* ---------- Fade-in on scroll ---------- */
+  .fade-section {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .fade-section.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ---------- Section headings ---------- */
+  .section-heading {
+    font-size: clamp(1.8rem, 4vw, 2.4rem);
+    margin-bottom: 48px;
+    text-align: center;
+  }
+
+  /* ---------- Projects ---------- */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+
+  .project-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-light);
+    border-top: 4px solid var(--blue);
+    border-radius: 10px;
+    padding: 28px;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .project-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 28px rgba(15, 23, 42, 0.1);
+  }
+
+  .project-card.border-green { border-top-color: var(--green); }
+  .project-card.border-blue { border-top-color: var(--blue); }
+  .project-card.border-purple { border-top-color: var(--purple); }
+
+  .project-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 12px;
+  }
+
+  .project-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  .project-title h3 {
+    margin-bottom: 0;
+  }
+
+  .project-link {
+    display: flex;
+    color: var(--body-text);
+    transition: color 0.2s ease;
+    flex-shrink: 0;
+  }
+
+  .project-link:hover {
+    color: var(--dark-blue);
+  }
+
+  .project-card p {
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+  }
+
+  .project-image-wrap {
+    position: relative;
+    overflow: hidden;
+    border-radius: 6px;
+    margin-bottom: 20px;
+  }
+
+  .project-image {
+    display: block;
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+  }
+
+  .project-image-overlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 16px;
+    font-size: 0.85rem;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+  }
+
+  .project-image-wrap:hover .project-image-overlay {
+    opacity: 1;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .tag {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 5px 12px;
+    border-radius: 999px;
+    background-color: #eef2ff;
+    color: var(--dark-blue);
+  }
+
+  /* ---------- Testimonials ---------- */
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+
+  .testimonial-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-light);
+    border-top: 4px solid var(--purple);
+    border-radius: 10px;
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .testimonial-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 28px rgba(15, 23, 42, 0.1);
+  }
+
+  .testimonial-card.border-green { border-top-color: var(--green); }
+  .testimonial-card.border-blue { border-top-color: var(--blue); }
+  .testimonial-card.border-purple { border-top-color: var(--purple); }
+
+  .testimonial-quote {
+    font-size: 0.95rem;
+    font-style: italic;
+    margin-bottom: 24px;
+    flex-grow: 1;
+  }
+
+  .testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .testimonial-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: var(--dark-blue);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+  }
+
+  .testimonial-name {
+    font-weight: 700;
+    color: var(--heading);
+    font-size: 0.95rem;
+  }
+
+  .testimonial-role {
+    font-size: 0.8rem;
+    color: var(--body-text);
+  }
+
+  /* ---------- About ---------- */
+  .about p {
+    font-size: 1.05rem;
+    margin-bottom: 20px;
+    max-width: 720px;
+  }
+
+  .about-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  /* ---------- Contact ---------- */
+  .contact {
+    text-align: center;
+  }
+
+  .contact-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 32px;
+  }
+
+  /* ---------- Footer ---------- */
+  footer {
+    text-align: center;
+    padding: 32px 24px;
+    font-size: 0.85rem;
+    color: var(--body-text);
+    border-top: 1px solid var(--border-light);
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 860px) {
+    .projects-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .testimonials-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 640px) {
+    section {
+      padding: 70px 20px;
+    }
+
+    .nav-links {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      flex-direction: column;
+      background-color: var(--white);
+      border-bottom: 1px solid var(--border-light);
+      padding: 20px 24px;
+      gap: 18px;
+      display: none;
+    }
+
+    .nav-links.open {
+      display: flex;
+    }
+
+    .nav-toggle {
+      display: flex;
+    }
+
+    .projects-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .testimonials-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .hero {
+      text-align: left;
+      align-items: flex-start;
+    }
+
+    .contact-buttons {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+</style>
+</head>
+<body>
+
+  <!-- ================= NAVIGATION ================= -->
+  <nav class="navbar">
+    <div class="nav-inner">
+      <div class="nav-logo">William</div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#hero">Home</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#testimonials">Testimonials</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ================= HERO ================= -->
+  <section id="hero" class="hero">
+    <h1>Hi, I'm William</h1>
+    <p class="subtitle">Freelance Web Developer based in Los Angeles</p>
+    <a href="#projects" class="btn btn-cta">View My Work</a>
+  </section>
+
+  <!-- ================= PROJECTS ================= -->
+  <section id="projects" class="fade-section">
+    <h2 class="section-heading">Projects</h2>
+    <div class="projects-grid">
+
+      <div class="project-card border-green">
+        <div class="project-title">
+          <h3>Portfolio Sample</h3>
+          <a href="https://photography-portfolio-kohl-phi.vercel.app/" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="Open Portfolio Sample in new tab">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+              <polyline points="15 3 21 3 21 9"></polyline>
+              <line x1="10" y1="14" x2="21" y2="3"></line>
+            </svg>
+          </a>
+        </div>
+        <div class="project-image-wrap">
+          <img src="images/portfolio-sample.png" alt="Portfolio Sample" class="project-image">
+          <div class="project-image-overlay">
+            <p>4-page responsive site with full-screen hero, masonry gallery with lightbox, about page with testimonial, contact form</p>
+          </div>
+        </div>
+        <div class="tags">
+          <span class="tag">HTML</span>
+          <span class="tag">CSS</span>
+          <span class="tag">JavaScript</span>
+        </div>
+      </div>
+
+      <div class="project-card border-blue">
+        <h3>Travel Blog</h3>
+        <p>A content-focused blog platform with custom themes and a fast, distraction-free reading experience. Optimized for images and long-form storytelling.</p>
+        <div class="tags">
+          <span class="tag">Next.js</span>
+          <span class="tag">Sanity CMS</span>
+          <span class="tag">Tailwind</span>
+        </div>
+      </div>
+
+      <div class="project-card border-purple">
+        <h3>Fitness App</h3>
+        <p>A workout tracking app with progress charts and custom training plans. Designed to keep users motivated with simple, satisfying interactions.</p>
+        <div class="tags">
+          <span class="tag">React Native</span>
+          <span class="tag">Firebase</span>
+          <span class="tag">Redux</span>
+        </div>
+      </div>
+
+      <div class="project-card border-green">
+        <h3>Recipe Finder</h3>
+        <p>A searchable recipe database with filters for dietary needs and available ingredients. Focused on fast search and clean, scannable results.</p>
+        <div class="tags">
+          <span class="tag">Vue.js</span>
+          <span class="tag">Express</span>
+          <span class="tag">MongoDB</span>
+        </div>
+      </div>
+
+      <div class="project-card border-blue">
+        <h3>Portfolio Template</h3>
+        <p>A customizable portfolio template for developers and designers, built with accessibility and performance in mind from the ground up.</p>
+        <div class="tags">
+          <span class="tag">HTML/CSS</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">GSAP</span>
+        </div>
+      </div>
+
+      <div class="project-card border-purple">
+        <h3>Chat Application</h3>
+        <p>A real-time messaging app with typing indicators and read receipts. Built on a socket-based architecture for low-latency communication.</p>
+        <div class="tags">
+          <span class="tag">Socket.io</span>
+          <span class="tag">React</span>
+          <span class="tag">PostgreSQL</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= ABOUT ================= -->
+  <section id="about" class="fade-section about">
+    <h2 class="section-heading">About Me</h2>
+    <div class="about-content">
+      <p>I'm a freelance web developer who believes great software sits at the intersection of clean code and thoughtful user experience. With a background spanning both front-end and back-end development, I focus on building applications that are not only functional but genuinely enjoyable to use. Every project starts with understanding the person on the other side of the screen.</p>
+      <p>Over the years I've worked with startups and established businesses alike, helping them turn ideas into polished, production-ready products. I care deeply about performance, accessibility, and maintainable architecture — the kind of details users may never notice, but always feel. When I'm not coding, I'm usually exploring new frameworks or contributing to open-source projects.</p>
+    </div>
+  </section>
+
+  <!-- ================= TESTIMONIALS ================= -->
+  <section id="testimonials" class="fade-section">
+    <h2 class="section-heading">What Clients Say</h2>
+    <div class="testimonials-grid">
+
+      <div class="testimonial-card border-green">
+        <p class="testimonial-quote">"William took our vague idea and turned it into a product our users actually love. Communication was clear from day one, and every deadline was met without cutting corners."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">SM</div>
+          <div>
+            <div class="testimonial-name">Sarah Mitchell</div>
+            <div class="testimonial-role">Founder, Northwind Retail</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card border-blue">
+        <p class="testimonial-quote">"Working with William felt like adding a senior engineer to the team overnight. The codebase we inherited was clean, well-documented, and easy to build on."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">JR</div>
+          <div>
+            <div class="testimonial-name">James Rodriguez</div>
+            <div class="testimonial-role">CTO, Fieldstone Labs</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card border-purple">
+        <p class="testimonial-quote">"What stood out most was the attention to detail on user experience. William asked the right questions early, which saved us from expensive changes later in the project."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">EC</div>
+          <div>
+            <div class="testimonial-name">Elena Chen</div>
+            <div class="testimonial-role">Product Lead, Brightpath</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= CONTACT ================= -->
+  <section id="contact" class="fade-section contact">
+    <h2 class="section-heading">Let's Work Together</h2>
+    <p>Have a project in mind or just want to say hello? I'd love to hear from you.</p>
+    <div class="contact-buttons">
+      <a href="mailto:hello@websweetweb.us" class="btn btn-contact">✉ hello@websweetweb.us</a>
+      <a href="https://github.com/coderwil" target="_blank" rel="noopener noreferrer" class="btn btn-contact">GitHub</a>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2026 William. Built with clean code and a lot of coffee.
+  </footer>
+
+  <script>
+    // Mobile nav toggle
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+
+    navToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+    });
+
+    // Close mobile menu when a link is clicked
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+      });
+    });
+
+    // Fade-in on scroll using IntersectionObserver
+    const fadeSections = document.querySelectorAll('.fade-section');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.15
+    });
+
+    fadeSections.forEach(section => observer.observe(section));
+  </script>
+
+</body>
+</html>
