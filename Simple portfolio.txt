@@ -1,0 +1,13 @@
+Simple portfolio: $200–$500
+standard is
+- Hero Page - welcome or home, who you are, what you do, where you are
+- Projects - a list of projects you have worked on with links to their sample sites ( or photos, etc )
+- About - A short couple of paragraphs introducing who you are, your mentality toward the craft and what experience you have
+[- Testimonials - citeable words of appreciation from former/current clients ]
+- Contact - link to email, link to full repo of work
+
+
+Interactive site: $500–$1,200
+Web app with forms: $800–$2,000
+E-commerce store: $1,500–$4,000
+AI-powered app: $2,500–$8,000+
