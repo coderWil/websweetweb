@@ -13,6 +13,8 @@
     --purple: #8B5CF6;
     --green: #10B981;
     --green-hover: #059669;
+    --teal: #14B8A6;
+    --teal-hover: #0D9488;
     --heading: #0f172a;
     --body-text: #6b7280;
     --card-bg: #ffffff;
@@ -232,6 +234,31 @@
   .project-card.border-green { border-top-color: var(--green); }
   .project-card.border-blue { border-top-color: var(--blue); }
   .project-card.border-purple { border-top-color: var(--purple); }
+  .project-card.border-teal { border-top-color: var(--teal); }
+
+  .project-card-featured {
+    position: relative;
+    grid-column: 1 / -1;
+  }
+
+  .featured-badge {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background-color: var(--teal);
+    color: var(--white);
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 6px 14px;
+    border-radius: 999px;
+    letter-spacing: 0.02em;
+    z-index: 2;
+  }
+
+  .project-card-featured .project-title h3 .project-link {
+    display: inline-flex;
+    vertical-align: middle;
+  }
 
   .project-card h3 {
     font-size: 1.2rem;
@@ -505,6 +532,30 @@
     <h2 class="section-heading">Projects</h2>
     <div class="projects-grid">
 
+      <div class="project-card border-teal project-card-featured">
+        <div class="featured-badge">Featured</div>
+        <div class="project-title">
+          <h3>English Tutor w/ AI chat&nbsp;&nbsp;&nbsp;<a href="https://ai-tutor-app-sample-sigma.vercel.app/" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="Open English Tutor w/ AI chat in new tab">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+              <polyline points="15 3 21 3 21 9"></polyline>
+              <line x1="10" y1="14" x2="21" y2="3"></line>
+            </svg>
+          </a></h3>
+        </div>
+        <div class="project-image-wrap">
+          <img src="images/english-tutor-ai-chat.png" alt="English Tutor w/ AI chat" class="project-image">
+          <div class="project-image-overlay">
+            <p>Interactive English tutor assistant app built using Claude AI as the assistant. Practice messaging in English with a helpful tutor. Use the PWA ability to download as a stand-alone app to your phone to use the vocab flashcards while offline.</p>
+          </div>
+        </div>
+        <div class="tags">
+          <span class="tag">HTML/CSS</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">AI Chat</span>
+        </div>
+      </div>
+
       <div class="project-card border-green">
         <div class="project-title">
           <h3>Portfolio Sample</h3>
@@ -554,7 +605,16 @@
       </div>
 
       <div class="project-card border-purple">
-        <h3>DJ Sample App</h3>
+        <div class="project-title">
+          <h3>DJ Sample App</h3>
+          <a href="https://djbookingform.vercel.app/" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="Open DJ Sample App in new tab">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+              <polyline points="15 3 21 3 21 9"></polyline>
+              <line x1="10" y1="14" x2="21" y2="3"></line>
+            </svg>
+          </a>
+        </div>
         <div class="project-image-wrap">
           <img src="images/dj-sample-app.png" alt="DJ Sample App" class="project-image">
           <div class="project-image-overlay">
